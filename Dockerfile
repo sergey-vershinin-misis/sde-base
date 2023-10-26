@@ -5,6 +5,6 @@ RUN pip install uvicorn
 
 COPY ./ ./
 
-EXPOSE 8000:8000
+EXPOSE 8000
 
 CMD ["python3", "main.py"]
