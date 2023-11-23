@@ -1,3 +1,5 @@
+from datetime import datetime, timedelta
+
 import pandas as pd
 import requests
 from pydantic import BaseModel
@@ -52,11 +54,14 @@ class VacanciesSet:
         self.data_frame = pd.json_normalize(found_items)
 
     def _get_vac_page_json(self, page_number: int = 0):
+
+        current_date = datetime.today()
+        start_date = current_date - timedelta(30)
         params = {
             'text': f'NAME:("{self.query}")',
             'area': 1,
-            'date_from': '2023-09-01',
-            'date_to': '2023-11-06',
+            'date_from': start_date.strftime('%Y-%m-%d'),
+            'date_to': current_date.strftime('%Y-%m-%d'),
             'per_page': 100,
             'page': page_number
         }
